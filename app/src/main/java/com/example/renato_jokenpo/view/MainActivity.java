@@ -1,3 +1,4 @@
+//versão final
 package com.example.renato_jokenpo.view;
 
 import android.content.Intent;
@@ -38,45 +39,21 @@ public class MainActivity extends AppCompatActivity {
         imageButtonPedra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ResultadoActivity.class);
-                Jogada jogada = Auxiliar.criaUmaJogada(0);
-                int ponto = jogada.getPonto();
-                int sorteio = jogada.getSorteio();
-                boolean impate = jogada.isImpate();
-                intent.putExtra("ponto", ponto);
-                intent.putExtra("sorteio", sorteio);
-                intent.putExtra("impate", impate);
-                startActivity(intent);
+                criaJogada(0);
             }
         });
 
         imageButtonPapel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ResultadoActivity.class);
-                Jogada jogada = Auxiliar.criaUmaJogada(1);
-                int ponto = jogada.getPonto();
-                int sorteio = jogada.getSorteio();
-                boolean impate = jogada.isImpate();
-                intent.putExtra("ponto", ponto);
-                intent.putExtra("sorteio", sorteio);
-                intent.putExtra("impate", impate);
-                startActivity(intent);
+                criaJogada(1);
             }
         });
 
         imageButtonTesoura.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ResultadoActivity.class);
-                Jogada jogada = Auxiliar.criaUmaJogada(2);
-                int ponto = jogada.getPonto();
-                int sorteio = jogada.getSorteio();
-                boolean impate = jogada.isImpate();
-                intent.putExtra("ponto", ponto);
-                intent.putExtra("sorteio", sorteio);
-                intent.putExtra("impate", impate);
-                startActivity(intent);
+                criaJogada(2);
             }
         });
 
@@ -100,6 +77,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return Auxiliar.onOptionsItemSelected(this, item);
+    }
+
+    private void criaJogada(int opcao) {
+        Intent intent = new Intent(MainActivity.this, ResultadoActivity.class);
+        Jogada jogada = Auxiliar.criaUmaJogada(opcao);
+        int ponto = jogada.getPonto();
+        int sorteio = jogada.getSorteio();
+        boolean impate = jogada.isImpate();
+        intent.putExtra("ponto", ponto);
+        intent.putExtra("sorteio", sorteio);
+        intent.putExtra("impate", impate);
+        startActivity(intent);
     }
 
 }

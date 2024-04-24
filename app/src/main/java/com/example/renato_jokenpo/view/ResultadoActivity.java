@@ -21,6 +21,8 @@ import com.google.android.material.button.MaterialButton;
 
 public class ResultadoActivity extends AppCompatActivity {
 
+    ImageView imageViewResultado;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,17 +36,17 @@ public class ResultadoActivity extends AppCompatActivity {
         });
 
         TextView textViewResultado = findViewById(R.id.textViewResultado);
-        ImageView imageViewResultado = findViewById(R.id.imageViewResultado);
+        imageViewResultado = findViewById(R.id.imageViewResultado);
 
         Intent intent = getIntent();
-        boolean empate = intent.getBooleanExtra("empate", false);
+        boolean impate = intent.getBooleanExtra("impate", false);
+        int ponto = intent.getIntExtra("ponto", -1);
+        int sorteio = intent.getIntExtra("sorteio", -1);
 
-        if (empate) {
+        if (impate) {
             textViewResultado.setText(R.string.voce_empatou);
+            defineImagem(sorteio);
         } else {
-            int ponto = intent.getIntExtra("ponto", -1);
-            int sorteio = intent.getIntExtra("sorteio", -1);
-
             if (ponto == 0) {
                 textViewResultado.setText(R.string.voce_perdeu);
             } else if (ponto == 1) {
@@ -52,20 +54,7 @@ public class ResultadoActivity extends AppCompatActivity {
             } else {
                 textViewResultado.setText(R.string.erro_no_sistema);
             }
-
-            switch (sorteio) {
-                case 0:
-                    imageViewResultado.setImageResource(R.drawable.pedra);
-                    break;
-                case 1:
-                    imageViewResultado.setImageResource(R.drawable.papel);
-                    break;
-                case 2:
-                    imageViewResultado.setImageResource(R.drawable.tesoura);
-                    break;
-                default:
-                    imageViewResultado.setImageResource(R.drawable.icon);
-            }
+            defineImagem(sorteio);
         }
 
         MaterialButton materialButtonNovo = findViewById(R.id.buttonNovoJogo);
@@ -105,5 +94,21 @@ public class ResultadoActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return Auxiliar.onOptionsItemSelected(this, item);
+    }
+
+    private void defineImagem(int sorteio) {
+        switch (sorteio) {
+            case 0:
+                imageViewResultado.setImageResource(R.drawable.pedra);
+                break;
+            case 1:
+                imageViewResultado.setImageResource(R.drawable.papel);
+                break;
+            case 2:
+                imageViewResultado.setImageResource(R.drawable.tesoura);
+                break;
+            default:
+                imageViewResultado.setImageResource(R.drawable.icon);
+        }
     }
 }

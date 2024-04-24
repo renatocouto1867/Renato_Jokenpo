@@ -31,9 +31,9 @@ public class Jogo {
     public void adicionarJogo(Jogada jogada) {//foi definido que cada rodada vale 1 pontos
         jogoList.add(jogada);
         if (!jogada.isImpate()) {
-            if (jogada.getPonto() > 0) {
-                pontosUsuario = pontosUsuario + 1;
-            } else pontosAndroid = pontosAndroid + 1;
+            if (jogada.getPonto() == 1) {
+                pontosUsuario ++;
+            } else pontosAndroid ++;
         }
 
     }
@@ -45,7 +45,7 @@ public class Jogo {
     }
 
     public String getPrimeiroColocado(Context context) {
-        if (pontosUsuario < pontosAndroid)
+        if (pontosUsuario <= pontosAndroid)
             return context.getString(R.string.andoid) + pontosAndroid;
         else return context.getString(R.string.usuario) + pontosUsuario;
     }
